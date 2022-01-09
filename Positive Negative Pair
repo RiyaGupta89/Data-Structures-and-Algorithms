@@ -1,0 +1,26 @@
+
+class Solution
+{
+    //Function to return list containing all the pairs having both
+    //negative and positive values of a number in the array.
+    public static ArrayList<Integer>findPairs(int arr[], int n) 
+    { 
+        ArrayList<Integer> arr1=new ArrayList<>();
+    	HashMap<Integer, Integer> memo=new HashMap<Integer, Integer>();
+		for(int i=0;i<arr.length;i++) {
+			if(memo.containsKey(-arr[i])) {
+			    if(arr[i]<0) {
+			        arr1.add(arr[i]);
+			        arr1.add(-arr[i]);
+			    } else {
+				    arr1.add(-arr[i]);
+				    arr1.add(arr[i]);
+			    }
+				memo.put(arr[i], 1);
+			} else {
+				memo.put(arr[i], 0);
+			}
+		}
+		return arr1;
+    }
+}
