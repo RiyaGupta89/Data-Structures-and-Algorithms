@@ -1,8 +1,6 @@
 
 class Solution
 {
-    //Function to return list containing all the pairs having both
-    //negative and positive values of a number in the array.
     public static ArrayList<Integer>findPairs(int arr[], int n) 
     { 
         ArrayList<Integer> arr1=new ArrayList<>();
