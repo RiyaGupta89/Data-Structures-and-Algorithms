@@ -1,0 +1,42 @@
+
+class Solution
+{
+    
+    public static Node reverse(Node head) {
+         Node current=head;
+        Node prev=null;
+        while(current!=null) {
+            Node tempNode = current.next;
+            current.next=prev;
+            prev=current;
+            current=tempNode;
+        }
+        return prev;
+    }
+    
+    public static Node addOne(Node head) 
+    { 
+       head = reverse(head);
+        
+        Node current=head;
+        Boolean f=true;
+        while(current!=null&&f==true) {
+            if(current.data==9) {
+                if(current.next!=null){
+                    current.data=0;
+                } else {
+                    current.data=current.data+1;
+                }
+            }else{
+                current.data=current.data+1;
+                f=false;
+            }
+            current = current.next;
+        }
+        
+        Node ans=reverse(head);
+        // reverse back
+      
+        return ans;
+    }
+}
