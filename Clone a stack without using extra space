@@ -1,0 +1,35 @@
+class Solution {
+    
+    public void pushAtBottom(int data, Stack<Integer> st) {
+        if(st.isEmpty()){
+            st.push(data);
+            return;
+        }
+        int top = st.pop();
+        pushAtBottom(data, st);
+        st.push(top);
+    }
+    
+    public void reverse(Stack<Integer> st) {
+        if(st.isEmpty()){
+            return;
+        }
+        
+        int top = st.pop();
+        reverse(st);
+        pushAtBottom(top,st);
+        
+    }
+    
+    void clonestack(Stack<Integer> st, Stack<Integer> cloned) {
+        
+        // reverse stack
+        reverse(st);
+        
+        while(!st.isEmpty()){
+            int top = st.pop();
+            cloned.push(top);
+        }
+        
+    }
+}
