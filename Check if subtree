@@ -1,0 +1,22 @@
+class Solution {
+    
+    public static boolean subtree(Node T, Node S) {
+        if(T==null&&S==null){
+            return true;
+        }
+        if(T==null&&S!=null){
+            return false;
+        }
+        if(T!=null&&S==null){
+            return false;
+        }
+        return ((T.data==S.data) && subtree(T.left, S.left) &&subtree(T.right, S.right));
+    }
+    
+    public static boolean isSubtree(Node T, Node S) {
+       if(T==null){
+           return false;
+       }
+       return (subtree(T,S) || isSubtree(T.left, S) || isSubtree(T.right, S));
+    }
+}
