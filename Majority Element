@@ -1,0 +1,23 @@
+import java.util.*;
+public class Solution {
+	public static int findMajority(int[] arr, int n) {
+		HashMap<Integer, Integer> memo=new HashMap<Integer,Integer>();
+		int ans=-1;
+        for(int i=0;i<n;i++){
+            if(memo.containsKey(arr[i])){
+                int value=memo.get(arr[i]);
+                memo.put(arr[i],value+1);
+            } else {
+                memo.put(arr[i],1);
+            }
+        }
+        
+            for(int i=0;i<n;i++){
+                if(memo.get(arr[i])>n/2){
+                    ans=arr[i];
+                    return ans;
+                }
+            }
+        return ans;
+	}
+}
