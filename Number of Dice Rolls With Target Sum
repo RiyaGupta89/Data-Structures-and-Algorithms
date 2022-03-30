@@ -1,0 +1,27 @@
+class Solution {
+    public int numRollsToTarget(int n, int k, int target) {
+        HashMap<String,Integer> memo=new HashMap<String,Integer>();
+        return totalWays(n,k,target,memo);
+    }
+    private int totalWays(int n,int k,int target,HashMap<String,Integer> memo){
+        if(n==0&&target==0){
+            return 1;
+        }
+        if(n<=0&&target!=0){
+            return 0;
+        }
+        String currentKey=n+"_"+target;
+        if(memo.containsKey(currentKey)){
+            return memo.get(currentKey);
+        }
+        int ways=0;
+        for(int i=1;i<=k;i++){
+            int tempAns=totalWays(n-1,k,target-i,memo)%1000000007;
+            ways=ways%1000000007;
+            ways=(ways+tempAns)%1000000007;
+        }
+        memo.put(currentKey,ways);
+        return ways;
+        
+    }
+}
