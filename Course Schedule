@@ -1,0 +1,48 @@
+class Solution {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+        for(int i=0;i<numCourses;i++){
+            graph.add(new ArrayList<>());
+        }
+        
+        for(int i=0;i<prerequisites.length;i++){
+            int u=prerequisites[i][0];
+            int v=prerequisites[i][1];
+            graph.get(v).add(u);
+        }
+        
+        
+        
+        //detect a cycle dfs
+        
+        
+        boolean[] recStack = new boolean[numCourses];
+        boolean[] visited = new boolean[numCourses];
+        
+        for(int i=0;i<graph.size();i++){
+            if(visited[i]==false){
+            if(dfs(i,graph,visited,recStack)){
+                return false;
+            }
+            }
+        }
+        return true;
+        
+    }
+    
+    private boolean dfs(int currentVertex,ArrayList<ArrayList<Integer>> graph, boolean[] visited, boolean[] recStack){
+     if(visited[currentVertex]==false){
+         visited[currentVertex]=true;
+         recStack[currentVertex]=true;
+         for(int neighbour:graph.get(currentVertex)){
+             if(visited[neighbour]==false&&dfs(neighbour,graph,visited,recStack)){
+                 return true;
+             } else if(recStack[neighbour]==true){
+                 return true;
+             }
+         }
+         recStack[currentVertex]=false;
+     }
+        return false;
+    }
+}
