@@ -1,0 +1,58 @@
+class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        
+        ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+        int[] answer=new int[numCourses];
+        int k=0;
+        
+        for(int i=0;i<numCourses;i++){
+            graph.add(new ArrayList<Integer>());
+        }
+        
+        for(int i=0;i<prerequisites.length;i++){
+            int u=prerequisites[i][0];
+            int v=prerequisites[i][1];
+            graph.get(v).add(u);
+        }
+//         kahn's algo
+        Queue<Integer> q=new LinkedList<>();
+        int[] indegree = new int[numCourses];
+        boolean[] visited = new boolean[numCourses];
+        for(int i=0;i<numCourses;i++){
+            for(int neighbour:graph.get(i)){
+                indegree[neighbour]+=1;
+            }
+        }
+        
+        for(int i=0;i<numCourses;i++){
+            if(indegree[i]==0){
+                q.add(i);
+            }
+        }
+        
+        while(!q.isEmpty()){
+            int currentVertex = q.remove();
+            if(visited[currentVertex]==true)
+                continue;
+            
+            visited[currentVertex]=true;
+            answer[k]=currentVertex;
+            k++;
+            for(int neighbour:graph.get(currentVertex)){
+                indegree[neighbour]-=1;
+                if(indegree[neighbour]==0){
+                    q.add(neighbour);
+                }
+            }
+        }
+        
+        if(k!=numCourses){
+            return new int[0];
+        }   
+        
+        return answer;
+        
+        
+        
+    }
+}
